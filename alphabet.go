@@ -45,9 +45,13 @@ func CompareStrings(a, b string) bool {
     }
 
     y := br[i]
-    if CompareRunes(x, y) {
-      return true
+    if x != y {
+      return CompareRunes(x, y)
     }
+  }
+
+  if len(br) > len(ar) {
+    return true
   }
 
   return false
