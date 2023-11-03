@@ -2,6 +2,8 @@ package alphabet
 
 import (
   "testing"
+  "reflect"
+  "fmt"
 )
 
 func TestCompareRunes(t *testing.T) {
@@ -93,6 +95,26 @@ func TestCompareStrings(t *testing.T) {
   x, y = "АБВ", "АВБ"
   if !CompareStrings(x, y) {
     t.Errorf("CompareStrings(\"%s\", \"%s\") = false; want true", x, y)
+  }
+}
+
+func TestSort(t *testing.T) {
+  x := []string{"яблоко", "ананас", "Дыня", "посёлок", "поселок"}
+  s := fmt.Sprintf("%v", x)
+  expect := []string{"Дыня", "ананас", "поселок", "посёлок", "яблоко"}
+  Sort(x)
+  if !reflect.DeepEqual(x, expect) {
+    t.Errorf("Sort(%s) = %v; want %v", s, x, expect)
+  }
+}
+
+func TestSortFold(t *testing.T) {
+  x := []string{"яблоко", "ананас", "Дыня", "посёлок", "поселок"}
+  s := fmt.Sprintf("%v", x)
+  expect := []string{"ананас", "Дыня", "поселок", "посёлок", "яблоко"}
+  SortFold(x)
+  if !reflect.DeepEqual(x, expect) {
+    t.Errorf("SortFold(%s) = %v; want %v", s, x, expect)
   }
 }
 
